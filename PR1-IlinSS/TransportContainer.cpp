@@ -1,8 +1,11 @@
 #include "TransportContainer.h"
+#include "Constants.h"        // ← ЭТО БЫЛО ПРОПУЩЕНО!
 #include <sstream>
 #include <algorithm>
 #include <cctype>
 #include <iostream>
+
+using namespace Constants;
 
 TransportContainer::~TransportContainer() {
     for (auto* v : vehicles) {
@@ -34,7 +37,7 @@ void TransportContainer::remove(const std::string& condition) {
     std::string field, op, valueStr;
     iss >> field >> op;
 
-    // Собираем оставшуюся часть как значение (для случая "владелец = Ivanov")
+    // Собираем оставшуюся часть как значение
     std::getline(iss, valueStr);
 
     // Убираем пробелы в начале значения
@@ -55,31 +58,45 @@ void TransportContainer::remove(const std::string& condition) {
     while (it != vehicles.end()) {
         bool shouldDelete = false;
 
-        // Проверка по скорости
-        if (field == "скорость" || field == "speed") {
-            int val = std::stoi(valueStr);
-            int current = (*it)->getSpeed();
-            if (op == ">" && current > val) shouldDelete = true;
-            else if (op == "<" && current < val) shouldDelete = true;
-            else if (op == "=" || op == "==") shouldDelete = (current == val);
-            else if (op == ">=") shouldDelete = (current >= val);
-            else if (op == "<=") shouldDelete = (current <= val);
+        // Проверка по скорости (используем константы из Constants.h)
+        if (field == SPEED_RU || field == SPEED_EN) {
+            try {
+                int val = std::stoi(valueStr);
+                int current = (*it)->getSpeed();
+                if (op == OP_GT && current > val) shouldDelete = true;
+                else if (op == OP_LT && current < val) shouldDelete = true;
+                else if (op == OP_EQ || op == OP_EQ2) shouldDelete = (current == val);
+                else if (op == OP_GE) shouldDelete = (current >= val);
+                else if (op == OP_LE) shouldDelete = (current <= val);
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Ошибка парсинга числа: " << valueStr << std::endl;
+                ++it;
+                continue;
+            }
         }
         // Проверка по расстоянию
-        else if (field == "расстояние" || field == "distance") {
-            int val = std::stoi(valueStr);
-            int current = (*it)->getDistance();
-            if (op == ">" && current > val) shouldDelete = true;
-            else if (op == "<" && current < val) shouldDelete = true;
-            else if (op == "=" || op == "==") shouldDelete = (current == val);
-            else if (op == ">=") shouldDelete = (current >= val);
-            else if (op == "<=") shouldDelete = (current <= val);
+        else if (field == DISTANCE_RU || field == DISTANCE_EN) {
+            try {
+                int val = std::stoi(valueStr);
+                int current = (*it)->getDistance();
+                if (op == OP_GT && current > val) shouldDelete = true;
+                else if (op == OP_LT && current < val) shouldDelete = true;
+                else if (op == OP_EQ || op == OP_EQ2) shouldDelete = (current == val);
+                else if (op == OP_GE) shouldDelete = (current >= val);
+                else if (op == OP_LE) shouldDelete = (current <= val);
+            }
+            catch (const std::exception& e) {
+                std::cerr << "Ошибка парсинга числа: " << valueStr << std::endl;
+                ++it;
+                continue;
+            }
         }
         // Проверка по владельцу
-        else if (field == "владелец" || field == "owner") {
+        else if (field == OWNER_RU || field == OWNER_EN) {
             std::string val = valueStr;
             std::string current = (*it)->getOwner();
-            if (op == "=" || op == "==") {
+            if (op == OP_EQ || op == OP_EQ2) {
                 shouldDelete = (current == val);
             }
         }
