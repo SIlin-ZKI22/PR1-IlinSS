@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <ClInclude Include="FileCommandReader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Transport.h" />
     <ClInclude Include="TransportContainer.h" />
