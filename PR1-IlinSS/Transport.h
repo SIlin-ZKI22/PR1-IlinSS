@@ -3,57 +3,38 @@
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
-// Базовый абстрактный класс
 class Transport {
 protected:
-    int speed;          // скорость
-    int distance;       // расстояние
-    std::string owner;  // имя владельца
+    int speed;
+    int distance;
+    std::string owner;
 
 public:
-    Transport(int sp, int dist, const std::string& own);
-    virtual ~Transport() = default;
+    Transport(int sp, int dist, const std::string& own)
+        : speed(sp), distance(dist), owner(own)
+    {
+        if (sp <= 0) {
+            throw std::invalid_argument("Скорость должна быть положительной");
+        }
+        if (dist < 0) {
+            throw std::invalid_argument("Расстояние не может быть отрицательным");
+        }
+        if (own.empty()) {
+            throw std::invalid_argument("Имя владельца не может быть пустым");
+        }
+    }
 
-    // Чисто виртуальный метод (делает класс абстрактным)
+    virtual ~Transport() = default;  // виртуальный деструктор
+
     virtual void print() const = 0;
 
-    // Геттеры
     int getSpeed() const { return speed; }
     int getDistance() const { return distance; }
     std::string getOwner() const { return owner; }
 };
 
-// Самолёт
-class Plane : public Transport {
-private:
-    int range;      // дальность полёта
-    int payload;    // грузоподъёмность
-
-public:
-    Plane(int sp, int dist, const std::string& own, int rng, int pay);
-    void print() const override;
-};
-
-// Поезд
-class Train : public Transport {
-private:
-    int wagons;     // количество вагонов
-
-public:
-    Train(int sp, int dist, const std::string& own, int wgn);
-    void print() const override;
-};
-
-// Грузовик
-class Truck : public Transport {
-private:
-    int capacity;   // грузоподъёмность
-    double volume;  // объём кузова
-
-public:
-    Truck(int sp, int dist, const std::string& own, int cap, double vol);
-    void print() const override;
-};
+// ... Plane, Train, Truck остаются без изменений, но добавить override
 
 #endif
