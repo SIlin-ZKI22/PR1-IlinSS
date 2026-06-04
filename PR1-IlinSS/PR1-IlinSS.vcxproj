@@ -139,6 +139,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileCommandReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Transport.cpp" />
     <ClCompile Include="TransportContainer.cpp" />

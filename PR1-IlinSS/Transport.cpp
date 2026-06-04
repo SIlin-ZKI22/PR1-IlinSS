@@ -1,22 +1,17 @@
 #include "Transport.h"
 #include <iomanip>
 
-// Transport
-Transport::Transport(int sp, int dist, const std::string& own)
-    : speed(sp), distance(dist), owner(own) {
-}
-
 // Plane
 Plane::Plane(int sp, int dist, const std::string& own, int rng, int pay)
     : Transport(sp, dist, own), range(rng), payload(pay) {
 }
 
 void Plane::print() const {
-    std::cout << "Самолёт | Владелец: " << owner
-        << " | Скорость: " << speed
-        << " | Расстояние: " << distance
-        << " | Дальность: " << range
-        << " | Грузоподъёмность: " << payload << std::endl;
+    std::cout << "[Самолёт] " << owner
+        << " | скорость=" << speed
+        << " | расстояние=" << distance
+        << " | дальность=" << range
+        << " | грузоподъёмность=" << payload << std::endl;
 }
 
 // Train
@@ -25,10 +20,10 @@ Train::Train(int sp, int dist, const std::string& own, int wgn)
 }
 
 void Train::print() const {
-    std::cout << "Поезд   | Владелец: " << owner
-        << " | Скорость: " << speed
-        << " | Расстояние: " << distance
-        << " | Вагонов: " << wagons << std::endl;
+    std::cout << "[Поезд]   " << owner
+        << " | скорость=" << speed
+        << " | расстояние=" << distance
+        << " | вагонов=" << wagons << std::endl;
 }
 
 // Truck
@@ -37,9 +32,9 @@ Truck::Truck(int sp, int dist, const std::string& own, int cap, double vol)
 }
 
 void Truck::print() const {
-    std::cout << "Грузовик| Владелец: " << owner
-        << " | Скорость: " << speed
-        << " | Расстояние: " << distance
-        << " | Грузоподъёмность: " << capacity
-        << " | Объём кузова: " << std::fixed << std::setprecision(1) << volume << std::endl;
+    std::cout << "[Грузовик] " << owner
+        << " | скорость=" << speed
+        << " | расстояние=" << distance
+        << " | грузоподъёмность=" << capacity
+        << " | объём кузова=" << std::fixed << std::setprecision(1) << volume << std::endl;
 }

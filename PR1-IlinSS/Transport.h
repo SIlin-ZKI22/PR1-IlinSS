@@ -35,6 +35,32 @@ public:
     std::string getOwner() const { return owner; }
 };
 
-// ... Plane, Train, Truck остаются без изменений, но добавить override
+class Plane : public Transport {
+private:
+    int range;
+    int payload;
+public:
+    Plane(int sp, int dist, const std::string& own, int rng, int pay);
+    void print() const override;
+};
+
+// Train
+class Train : public Transport {
+private:
+    int wagons;
+public:
+    Train(int sp, int dist, const std::string& own, int wgn);
+    void print() const override;
+};
+
+// Truck
+class Truck : public Transport {
+private:
+    int capacity;
+    double volume;
+public:
+    Truck(int sp, int dist, const std::string& own, int cap, double vol);
+    void print() const override;
+};
 
 #endif

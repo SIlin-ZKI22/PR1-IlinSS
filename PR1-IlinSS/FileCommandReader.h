@@ -2,7 +2,10 @@
 #define FILECOMMANDREADER_H
 
 #include <string>
-#include "TransportContainer.h"
+#include <sstream>
+
+// Forward declaration (объявление, что такой класс существует)
+class TransportContainer;
 
 class FileCommandReader {
 private:
