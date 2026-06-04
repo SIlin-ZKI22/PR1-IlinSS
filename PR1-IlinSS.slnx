@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="PR1-IlinSS/PR1-IlinSS.vcxproj" Id="b16ebd64-8e8a-41fb-b4cf-e9c011b93b7e" />
+</Solution>

@@ -1,0 +1,9 @@
+ADD Plane 500 10 Ivanov 800 1000
+ADD Train 120 600 Petrov 15
+PRINT
+ADD Truck 90 300 Sidorov 5000 12.5
+PRINT
+REM скорость > 100
+PRINT
+REM владелец = Sidorov
+PRINT
